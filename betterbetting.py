@@ -21,7 +21,7 @@ class player:
     #or the HBROG function.(see end of code for more)
     #It uses the player's luck history to compute a luck value which is
     #self regulating, and performs a weighted desision.
-    def GenerateOutcome(self, p1):
+    def GenerateOutcome(self):
         mode = 0
 
         if(p1.luck < 0.5):
@@ -50,13 +50,22 @@ class player:
 
 def dblOrNtg(p1):
     amount = p1.purse
-    if(p1.GenerateOutcome(p1)):
+    if(p1.GenerateOutcome()):
         p1.purse += p1.purse
         return "You won " + str(amount) + ". Your balance is " + str(p1.purse)
     else:
         p1.purse = 0
         return "You lost" + str(amount) + ". Your balance is " + str(p1.purse)
 
+def simpleBet(p1, amount):
+    
+    if(p1.GenerateOutcome()):
+        p1.purse += amount
+        return "You won " + str(amount) + ". Your balance is " + str(p1.purse)
+    else:
+        p1.purse-= amount
+        return "You lost" + str(amount) + ". Your balance is " + str(p1.purse)
+    
         
 '''
 Here beging a short explanation of the HBROG algorithm.
